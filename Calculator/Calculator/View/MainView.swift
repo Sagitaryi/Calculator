@@ -25,37 +25,70 @@ struct MainView: View {
             Color.black
                 .ignoresSafeArea()
 
-            VStack {
+            VStack(spacing: Constants.spacing) {
 
+                Spacer()
                 // MARK: Display
                 HStack {
                     Spacer()
                     Text("0")
                         .foregroundStyle(.white)
-                        .font(.system(size: 90))
+                        .font(.system(size: Constants.displayCharacterSize))
                         .fontWeight(.light)
+                        .padding(.horizontal, buttonHeight() / 3)
                 }
 
                 // MARK: Buttons
                 ForEach(buttonsArray, id: \.self) { row in
-                    HStack {
+                    HStack(spacing: Constants.spacing) {
                         ForEach(row, id: \.self) { item in
                             Button {
                                 // action
                             } label: {
-                                Text(item.rawValue)
-                                    .frame(width: 80, height: 80)
-                                    .foregroundStyle(item.buttonFontColor)
-                                    .background(item.buttonColor)
-                                    .font(.system(size: item.buttonFontSize))
-                                    .fontWeight(item.buttonFontWeight)
-                                    .clipShape(Circle())
+                                    Text(item.rawValue)
+                                    .padding(item == .zero ? buttonHeight() / 2.5 : 0)
+                                        .frame(
+                                            width: self.buttonWidth(item: item),
+                                            height: self.buttonHeight(),
+                                            alignment: item == .zero ? .leading : .center
+                                        )
+                                        .foregroundStyle(item.buttonFontColor)
+                                        .background(item.buttonColor)
+                                        .font(.system(size: item.buttonFontSize))
+                                        .fontWeight(item.buttonFontWeight)
+                                        .clipShape(RoundedRectangle(cornerRadius: buttonHeight()/2))
                             }
                         }
                     }
                 }
             }
+            .padding(.bottom, Constants.spacing * 3)
         }
+    }
+
+    // MARK: Size of Buttons Methods
+    func buttonWidth(item: Buttons) -> CGFloat {
+        let width: CGFloat
+        let spacing: CGFloat = Constants.spacing
+        let totalSpacing: CGFloat = 5 * spacing
+        let totalColumns: CGFloat = 4
+        let screenWidth = UIScreen.main.bounds.width
+
+        if item == .zero {
+            width = (screenWidth - totalSpacing) / totalColumns * 2 + spacing
+        } else {
+            width = (screenWidth - totalSpacing) / totalColumns
+        }
+        return width
+    }
+
+    func buttonHeight() -> CGFloat {
+        let spacing: CGFloat = Constants.spacing
+        let totalSpacing: CGFloat = 5 * spacing
+        let totalColumns: CGFloat = 4
+        let screenWidth = UIScreen.main.bounds.width
+
+        return (screenWidth - totalSpacing) / totalColumns
     }
 }
 
