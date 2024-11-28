@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+enum Operation {
+    case addition, subtract, multiply, divide, none
+}
+
 enum Buttons: String {
     case zero = "0"
     case one = "1"
@@ -63,6 +67,23 @@ enum Buttons: String {
             return Font.Weight.semibold
         default:
             return Font.Weight.regular
+        }
+    }
+}
+
+extension Buttons {
+    func buttonToOperation() -> Operation {
+        switch self {
+        case .plus:
+            return .addition
+        case .minus:
+            return .subtract
+        case .multiple:
+            return .multiply
+        case .divide:
+            return .divide
+        default:
+            return .none
         }
     }
 }
