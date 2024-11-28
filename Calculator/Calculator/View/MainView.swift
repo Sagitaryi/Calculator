@@ -46,7 +46,8 @@ struct MainView: View {
                                 Text(item.rawValue)
                                     .frame(width: 80, height: 80)
                                     .foregroundStyle(Color.white)
-                                    .background(Color.orange)
+                                    .background(item.buttonColor)
+                                    .font(.system(size: 35))
                                     .clipShape(Circle())
                             }
                         }
