@@ -45,9 +45,10 @@ struct MainView: View {
                             } label: {
                                 Text(item.rawValue)
                                     .frame(width: 80, height: 80)
-                                    .foregroundStyle(Color.white)
+                                    .foregroundStyle(item.buttonFontColor)
                                     .background(item.buttonColor)
-                                    .font(.system(size: 35))
+                                    .font(.system(size: item.buttonFontSize))
+                                    .fontWeight(item.buttonFontWeight)
                                     .clipShape(Circle())
                             }
                         }
