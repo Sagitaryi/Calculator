@@ -19,7 +19,7 @@ enum Buttons: String {
     case eight = "8"
     case nine = "9"
     case plus = "+"
-    case minus = "-"
+    case minus = "–"
     case multiple = "×"
     case divide = "÷"
     case equal = "="
@@ -36,6 +36,33 @@ enum Buttons: String {
             return Color.orangeCalc
         default:
             return Color.darkGrayCalc
+        }
+    }
+
+    var buttonFontColor: Color {
+        switch self {
+        case .clear, .negative, .percent:
+            return Color.black
+        default:
+            return Color.white
+        }
+    }
+
+    var buttonFontSize: CGFloat {
+        switch self {
+        case .divide, .multiple, .minus, .plus, .equal:
+            return 45
+        default:
+            return 35
+        }
+    }
+
+    var buttonFontWeight: Font.Weight {
+        switch self {
+        case .divide, .multiple, .minus, .plus, .equal:
+            return Font.Weight.semibold
+        default:
+            return Font.Weight.regular
         }
     }
 }
